@@ -31,7 +31,7 @@ train_images, test_images = train_images / 255.0, test_images / 255.0
 
 label_names = ['airplane', 'automobile', 'bird', 'cat', 'deer',
                'dog', 'frog', 'horse', 'ship', 'truck']
-epochs = 100
+epochs = 10
 
 plt.figure(figsize=(10,10))
 for i in range(25):
@@ -55,6 +55,51 @@ def threeConv2D():
   model.add(layers.Conv2D(64, (3, 3), activation='relu'))
   model.add(layers.Conv2D(64, (3, 3), activation='relu'))
   model.add(layers.MaxPooling2D((2, 2)))
+
+  return model
+
+
+def testModel():
+  model = models.Sequential()
+  model.add(layers.Conv2D(32, (3,3), activation='relu', input_shape=(32,32,3)))
+  model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(layers.MaxPooling2D((2, 2)))
+  model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(layers.MaxPooling2D((2, 2)))
+
+  return model
+
+
+def adaptedTest():
+  model = models.Sequential()
+  model.add(layers.Conv2D(32, (3,3), activation='relu', input_shape=(32,32,3)))
+  model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(layers.MaxPooling2D((2, 2)))
+  model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(layers.MaxPooling2D((2, 2)))
+  model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(layers.MaxPooling2D((2, 2)))
+
+  return model
+
+
+
+def sixFold():
+  model = models.Sequential()
+  model.add(layers.Conv2D(32, (3,3), activation='relu', input_shape=(32,32,3)))
+  model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(layers.MaxPooling2D((2, 2)))
+  model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(layers.MaxPooling2D((2, 2)))
+  model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+  model.add(layers.MaxPooling2D((2, 2)))
+  
 
   return model
 
@@ -93,7 +138,7 @@ def customNetWithSigmoid():
 # convModel = threeConv2D()
 # convModel.summary()
 
-net = fourFoldConv()
+net = sixFold()
 net.summary()
 
 # Flatten layers
